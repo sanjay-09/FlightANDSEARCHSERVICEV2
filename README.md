@@ -1,12 +1,14 @@
-1...Clone the project
+# Flight And Search Service
+- Clone the project
 
-2.... npm install to install the packages
+- npm install to install the packages
 
-3.....setup the .env file with below variable
-    PORT
+- setup the .env file with below variable
+    - `PORT=3000`
 
 
-4....Inside the src/config folder,create the new file with name config.json and paste this:
+- Inside the src/config folder,create the new file with name config.json and paste this:
+```
 {
   "development": {
     "username": <YOUR_DB_USER>
@@ -17,3 +19,6 @@
   },
  
 }
+```
+
+- after this go the src folder and execute npx sequelize db:create
