@@ -35,7 +35,8 @@ class CityRepository{
                     id:cityId
 
                 }
-            })
+            });
+            return true;
 
         }
         catch(err){
