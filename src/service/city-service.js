@@ -1,5 +1,5 @@
-const {CityRepository}=require("../repository/index");
-class cityService {
+const {CityRepository}=require("../repository/index.js");
+class CityService {
     constructor(){
         this.cityRepository=new CityRepository();
     }
@@ -7,6 +7,7 @@ class cityService {
     async createCity(data){
 
         try{
+            console.log("sercoce");
             const city=await this.cityRepository.createCity(data);
             return city;
 
@@ -57,4 +58,4 @@ class cityService {
 
 
 }
-module.exports=cityService;
+module.exports=CityService;

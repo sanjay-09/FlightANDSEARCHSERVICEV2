@@ -1,5 +1,6 @@
 const express=require("express");
 const bodyParser=require("body-parser");
+const {create}=require("./controllers/city-controller.js");
 
 const {PORT}=require("./config/serverConfig.js")
 
@@ -9,6 +10,8 @@ const setUpAndStartServer=async function(){
 
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended:true}));
+
+    app.post("/create",create);
 
 
 
