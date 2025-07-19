@@ -13,6 +13,7 @@ const setUpAndStartServer=async function(){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended:true}));
 
+
   app.use("/api",apiRoutes);
 
 

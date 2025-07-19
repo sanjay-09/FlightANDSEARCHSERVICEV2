@@ -61,6 +61,7 @@ const destroy=async function(req,res){
 //get =>/city/:id
 const get=async function(req,res){
     try{
+        logger.info("controller layer");
         
       
         const city=await cityService.getCity(req.params.id);
@@ -111,10 +112,37 @@ const update=async function(req,res){
 
 }
 
+const getAll=async function(req,res){
+    try{
+        logger.info("inside the controller layer");
+        console.log("query",req.query);
+        const cities=await cityService.getAllCities(req.query);
+        return res.status(200).json({
+            data:cities,
+            status:true,
+            message:"successfully fetched all the cities",
+            err:{}
+        });
+        
+    }
+    catch(err){
+        logger.error(err);
+        return res.status(500).json({
+            data:{},
+            status:false,
+            message:"Failed to fetch all the cities",
+            err:{err}
+
+
+        })
+    }
+}
+
 
 module.exports={
     create,
     destroy,
     get,
-    update
+    update,
+    getAll
 }

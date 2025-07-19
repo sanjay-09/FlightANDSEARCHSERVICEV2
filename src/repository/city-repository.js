@@ -1,5 +1,6 @@
 const {City}=require("../models/index");
 const logger = require('../logger');
+const { Op } = require("sequelize");
 
 class CityRepository{
     async createCity({name}){
@@ -62,6 +63,34 @@ class CityRepository{
             throw err;
         }
 
+    }
+
+    async  getAllCities(filter) {
+        try{
+            logger.info("inside the city repository layer");
+        
+            if(filter.name){
+                const cities=await City.findAll({
+                    where:{
+                        name:{
+                            [Op.startsWith]:filter.name
+                        }
+                    }
+                })
+                return cities;
+
+            }
+            const cities=await City.findAll();
+            return cities;
+
+        }
+        catch(err){
+            throw {err};
+            
+
+        }
+
+        
     }
 
 

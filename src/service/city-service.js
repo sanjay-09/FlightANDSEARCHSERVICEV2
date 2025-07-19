@@ -51,6 +51,7 @@ class CityService {
     }
     async getCity(cityId){
         try{
+            logger.info("inside the city service layer");
             const city=await this.cityRepository.getCityById(cityId);
             return city;
 
@@ -60,6 +61,18 @@ class CityService {
             throw {err};
         }
          
+    }
+    async getAllCities(data){
+        try{
+            logger.info("inside the service layer");
+            const cities=await this.cityRepository.getAllCities({name:data.name});
+            return cities;
+
+        }
+        catch(err){
+            throw {err};
+        }
+    
     }
 
 
