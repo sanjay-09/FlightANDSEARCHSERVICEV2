@@ -1,18 +1,22 @@
 const {CityRepository}=require("../repository/index.js");
+const logger=require("../logger.js")
 class CityService {
     constructor(){
         this.cityRepository=new CityRepository();
     }
      
     async createCity(data){
-
         try{
-            console.log("sercoce");
+            logger.info("city creation reached at the service layer");
+          
             const city=await this.cityRepository.createCity(data);
+           
             return city;
 
         }
         catch(err){
+            console.log(err);
+            
             console.log("something went wrong at the service layer");
             throw {err};
         }
@@ -20,7 +24,10 @@ class CityService {
     }
     async deleteCity(cityId){
         try{
+
+            logger.info("deletion process inside service layer");
             await this.cityRepository.deleteCityById(cityId);
+            return true;
             
 
         }

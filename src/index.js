@@ -1,8 +1,10 @@
 const express=require("express");
 const bodyParser=require("body-parser");
 const {create}=require("./controllers/city-controller.js");
+const apiRoutes=require("./routes/index.js");
 
-const {PORT}=require("./config/serverConfig.js")
+const {PORT}=require("./config/serverConfig.js");
+
 
 const setUpAndStartServer=async function(){
 
@@ -11,7 +13,7 @@ const setUpAndStartServer=async function(){
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended:true}));
 
-    app.post("/create",create);
+  app.use("/api",apiRoutes);
 
 
 

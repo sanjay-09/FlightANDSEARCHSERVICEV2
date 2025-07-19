@@ -1,17 +1,19 @@
-
-const { where } = require("sequelize");
 const {City}=require("../models/index");
+const logger = require('../logger');
 
 class CityRepository{
     async createCity({name}){
        try{
-        console.log("repo");
+         logger.info("city creation reached at the repository layer");
+       
          const city=await City.create({
             name
         });
+       
         return city;
        }
        catch(err){
+      logger.error("city creation failed at the repo layer",err);
         throw {err};
        }
 
@@ -19,18 +21,20 @@ class CityRepository{
 
     async getCityById(cityId){
         try{
-            const city=await City.findByPK(cityId);
+            const city=await City.findByPk(cityId);
             return city;
 
         }
         catch(err){
-            return {err};
+           console.log("something went wrong at the repo layer");
+            throw {err};
 
         }
     }
 
     async deleteCityById(cityId){
         try{
+            logger.info("deletion process inside the repo layer");
             await City.destroy({
                 where:{
                     id:cityId
@@ -48,12 +52,11 @@ class CityRepository{
 
     async updateCityById(cityId,data){
         try{
-            const city=await City.update(data,{
-            where:{
-                id:cityId
-            }
-        });
+           const city=await City.findByPk(cityId);
+           city.name=data.name;
+           await city.save();
         return city;
+        
         }
         catch(err){
             throw err;
