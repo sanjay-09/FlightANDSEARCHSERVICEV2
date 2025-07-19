@@ -115,7 +115,7 @@ const update=async function(req,res){
 const getAll=async function(req,res){
     try{
         logger.info("inside the controller layer");
-        console.log("query",req.query);
+        console.log("query",req.body);
         const cities=await cityService.getAllCities(req.query);
         return res.status(200).json({
             data:cities,
@@ -146,3 +146,4 @@ module.exports={
     update,
     getAll
 }
+

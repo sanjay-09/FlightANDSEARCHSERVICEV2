@@ -1,6 +1,7 @@
 const {City}=require("../models/index");
 const logger = require('../logger');
 const { Op } = require("sequelize");
+const repository = require(".");
 
 class CityRepository{
     async createCity({name}){
@@ -18,6 +19,20 @@ class CityRepository{
         throw {err};
        }
 
+    }
+
+    async createMultipleCities(name){
+        try{
+            const cities=await City.bulkCreate(name,{validate:true});
+            return cities;
+
+        }
+        catch(err){
+            
+            console.log('error at the service layer');
+            throw {err};
+
+        }
     }
 
     async getCityById(cityId){

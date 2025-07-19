@@ -8,10 +8,24 @@ class CityService {
     async createCity(data){
         try{
             logger.info("city creation reached at the service layer");
-          
-            const city=await this.cityRepository.createCity(data);
+            if(Array.isArray(data.name)){
+                const names=data.name.map(function(x){
+                    return {name:x}
+                });
+                console.log(names);
+                const city=await this.cityRepository.createMultipleCities(names);
+                return city;
+
+
+            }
+            else{
+        const city=await this.cityRepository.createCity(data);
            
             return city;
+
+            }
+          
+          
 
         }
         catch(err){
