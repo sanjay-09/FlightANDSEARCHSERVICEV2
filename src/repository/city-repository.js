@@ -1,7 +1,7 @@
 const {City}=require("../models/index");
 const logger = require('../logger');
 const { Op } = require("sequelize");
-const repository = require(".");
+
 
 class CityRepository{
     async createCity({name}){
@@ -69,8 +69,13 @@ class CityRepository{
     async updateCityById(cityId,data){
         try{
            const city=await City.findByPk(cityId);
-           city.name=data.name;
-           await city.save();
+           if(data.name){
+            city.name=data.name;
+            await city.save();
+
+           }
+        
+           
         return city;
         
         }
