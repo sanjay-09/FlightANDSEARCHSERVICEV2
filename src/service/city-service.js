@@ -67,6 +67,7 @@ class CityService {
         try{
             logger.info("inside the city service layer");
             const city=await this.cityRepository.getCityById(cityId);
+            console.log("city",typeof(city.toJSON().name));
             return city;
 
         }

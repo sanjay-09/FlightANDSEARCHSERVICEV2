@@ -22,3 +22,11 @@
 ```
 
 - after this go the src folder and execute npx sequelize db:create
+
+## DB Design
+   - Airplane Table `id,model_number,capacity,capacity `
+   - Flight Table `id,flight number,airplane_id, src_airport_id,dest_airport_id,departure_date,arrival_date`
+   - Airport `id,name,city_id,address`
+   - City `id,name`
+
+   

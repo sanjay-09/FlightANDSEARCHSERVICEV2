@@ -20,7 +20,12 @@ module.exports = (sequelize, DataTypes) => {
       unique:true
 
     },
-    capacity: DataTypes.INTEGER
+    capacity: DataTypes.INTEGER,
+    manufacturer:{
+          type: DataTypes.STRING,
+      allowNull:false,
+
+  }
   }, {
     sequelize,
     modelName: 'Airplane',
