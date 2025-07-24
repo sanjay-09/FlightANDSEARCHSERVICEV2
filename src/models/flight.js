@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Flight extends Model {
     /**
@@ -10,7 +11,21 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+       Flight.hasMany(models.Seat, { foreignKey: 'flight_id' });
+
+       Flight.afterCreate(async (flight, options) => {
+  const seatPromises = [];
+
+  for (let i = 1; i <= flight.total_seats; i++) {
+    seatPromises.push({
+      flight_id: flight.id,
+      seat_number: `${i}`, 
+    });
+  }
+
+  await models.Seat.bulkCreate(seatPromises);
+});
+
     }
   }
   Flight.init({
@@ -52,5 +67,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Flight',
   });
+  
   return Flight;
 };

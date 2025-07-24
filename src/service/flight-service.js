@@ -17,7 +17,7 @@ class FlightService{
         const capacity=airplaneSerializeDetail.capacity;
 
         const compare=compareTime(data.arrival_time,data.departure_time);
-        if(compare){
+        if(!compare){
             throw {err:"Arrival time can not be less than departure time"}
 
         }
@@ -57,6 +57,18 @@ class FlightService{
         }
         catch(err){
             throw {err};
+        }
+    }
+
+    async updateSeatData(flightId,data){
+        try{
+            const updatedData=await this.flightRepository.updateSeatData(flightId,data);
+            return updatedData;
+
+        }
+        catch(err){
+            throw err;
+
         }
     }
 

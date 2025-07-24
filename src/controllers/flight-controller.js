@@ -72,8 +72,36 @@ const getAll=async function(req,res){
     }
 
 }
+
+const update=async function(req,res){
+    try{
+        const flightId=req.params.id;
+        const finaldata={seat:req.body.seat};
+        const data=await flightService.updateSeatData(flightId,finaldata);
+        return res.status(200).json({
+            data:data,
+            status:true,
+            message:"Updated the seat data",
+            err:{}
+
+        })
+
+    }
+    catch(err){
+        console.log(err);
+        return res.status(500).json({
+            data:{},
+            status:false,
+            message:"not able to fetch the flights",
+            err:err
+        })
+
+    }
+
+}
 module.exports={
     create,
     get,
-    getAll
+    getAll,
+    update
 }

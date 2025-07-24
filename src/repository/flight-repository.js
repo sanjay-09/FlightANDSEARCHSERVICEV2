@@ -83,6 +83,23 @@ class FlightRepository{
        }
         
     }
+    async updateSeatData(flightId,data){
+        try{
+            const flight=await Flight.findByPk(flightId);
+            flight.total_seats=data.seat;
+            await flight.save();
+
+            return flight;
+            
+
+
+
+        }
+        catch(err){
+            throw err;
+
+        }
+    }
 
 }
 module.exports=FlightRepository;
